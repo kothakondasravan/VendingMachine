@@ -14,10 +14,11 @@ namespace VendingMachine
         protected void Page_Load(object sender, EventArgs e)
         {
               VendingBL vm = new VendingBL();
-            //    quantity qnt = new quantity();
-            //    int id = qnt.qntId;
-            
-                List<string> invalid = vm.Qnty(1);
+              quantity qnt = new quantity();
+              int id = qnt.qntId;
+
+
+            List<string> invalid = vm.Qnty(id);
                 if (invalid.Count == 0)
                 {
                     lblLow.Text = "";

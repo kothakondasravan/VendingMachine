@@ -51,7 +51,7 @@ namespace VendingMachine.Models
         {
             var qntComp = vc.quantities.Where(p => p.qntId == id).FirstOrDefault();
             List<string> error = new List<string>();
-            
+            qntComp = new quantity();
             if (qntComp.quantity1 <= qntComp.qntCtrl)
             {
                 error.Add("Please update the Vending Machine");
