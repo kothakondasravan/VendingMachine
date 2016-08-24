@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="e7a90bea07134585aace0f7c17faea48" Name="Diagram1">
+        <EntityTypeShape EntityType="VendingMachineModel.price" Width="1.5" PointX="3" PointY="1.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="VendingMachineModel.quantity" Width="1.5" PointX="3" PointY="4.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="VendingMachineModel.soda" Width="1.5" PointX="0.75" PointY="3.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="VendingMachineModel.vending" Width="1.5" PointX="5.25" PointY="2.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="VendingMachineModel.vendingTable" Width="1.5" PointX="5.75" PointY="6.75" IsExpanded="true" />
+        <AssociationConnector Association="VendingMachineModel.FK__price__sodaId__68487DD7" ManuallyRouted="false" />
+        <AssociationConnector Association="VendingMachineModel.FK__vending__priceId__778AC167" ManuallyRouted="false" />
+        <AssociationConnector Association="VendingMachineModel.FK__quantity__sodaId__73BA3083" ManuallyRouted="false" />
+        <AssociationConnector Association="VendingMachineModel.FK__vending__sodaQnt__787EE5A0" ManuallyRouted="false" />
+        <AssociationConnector Association="VendingMachineModel.FK__vending__sodaId__76969D2E" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

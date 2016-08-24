@@ -1,0 +1,59 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="VendingMachineModelStoreContainer" CdmEntityContainer="VendingMachineContext">
+    <EntitySetMapping Name="prices">
+      <EntityTypeMapping TypeName="VendingMachineModel.price">
+        <MappingFragment StoreEntitySet="price">
+          <ScalarProperty Name="priceId" ColumnName="priceId" />
+          <ScalarProperty Name="sodaId" ColumnName="sodaId" />
+          <ScalarProperty Name="price1" ColumnName="price" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="quantities">
+      <EntityTypeMapping TypeName="VendingMachineModel.quantity">
+        <MappingFragment StoreEntitySet="quantity">
+          <ScalarProperty Name="qntId" ColumnName="qntId" />
+          <ScalarProperty Name="sodaId" ColumnName="sodaId" />
+          <ScalarProperty Name="quantity1" ColumnName="quantity" />
+          <ScalarProperty Name="qntCtrl" ColumnName="qntCtrl" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="sodas">
+      <EntityTypeMapping TypeName="VendingMachineModel.soda">
+        <MappingFragment StoreEntitySet="soda">
+          <ScalarProperty Name="sodaId" ColumnName="sodaId" />
+          <ScalarProperty Name="sodaName" ColumnName="sodaName" />
+          <ScalarProperty Name="sodaBrand" ColumnName="sodaBrand" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="vendings">
+      <EntityTypeMapping TypeName="VendingMachineModel.vending">
+        <MappingFragment StoreEntitySet="vending">
+          <ScalarProperty Name="vendId" ColumnName="vendId" />
+          <ScalarProperty Name="sodaId" ColumnName="sodaId" />
+          <ScalarProperty Name="soldqnt" ColumnName="soldqnt" />
+          <ScalarProperty Name="priceent" ColumnName="priceent" />
+          <ScalarProperty Name="orgprice" ColumnName="orgprice" />
+          <ScalarProperty Name="priceId" ColumnName="priceId" />
+          <ScalarProperty Name="sodaQnt" ColumnName="sodaQnt" />
+          <ScalarProperty Name="boughttime" ColumnName="boughttime" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="vendingTables">
+      <EntityTypeMapping TypeName="VendingMachineModel.vendingTable">
+        <MappingFragment StoreEntitySet="vendingTable">
+          <ScalarProperty Name="vendingId" ColumnName="vendingId" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="PricePerUnit" ColumnName="PricePerUnit" />
+          <ScalarProperty Name="SoldQuantity" ColumnName="SoldQuantity" />
+          <ScalarProperty Name="PriceBought" ColumnName="PriceBought" />
+          <ScalarProperty Name="BoughtTimeMain" ColumnName="BoughtTimeMain" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

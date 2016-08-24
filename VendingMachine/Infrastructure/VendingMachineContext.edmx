@@ -1,0 +1,378 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="VendingMachineModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="price">
+          <Key>
+            <PropertyRef Name="priceId" />
+          </Key>
+          <Property Name="priceId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="sodaId" Type="int" />
+          <Property Name="price" Type="float" Nullable="false" />
+        </EntityType>
+        <EntityType Name="quantity">
+          <Key>
+            <PropertyRef Name="qntId" />
+          </Key>
+          <Property Name="qntId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="sodaId" Type="int" />
+          <Property Name="quantity" Type="int" />
+          <Property Name="qntCtrl" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="soda">
+          <Key>
+            <PropertyRef Name="sodaId" />
+          </Key>
+          <Property Name="sodaId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="sodaName" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="sodaBrand" Type="nvarchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <EntityType Name="vending">
+          <Key>
+            <PropertyRef Name="vendId" />
+          </Key>
+          <Property Name="vendId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="sodaId" Type="int" />
+          <Property Name="soldqnt" Type="int" Nullable="false" />
+          <Property Name="priceent" Type="float" Nullable="false" />
+          <Property Name="orgprice" Type="float" Nullable="false" />
+          <Property Name="priceId" Type="int" />
+          <Property Name="sodaQnt" Type="int" />
+          <Property Name="boughttime" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="vendingTable">
+          <Key>
+            <PropertyRef Name="vendingId" />
+          </Key>
+          <Property Name="vendingId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="PricePerUnit" Type="float" Nullable="false" />
+          <Property Name="SoldQuantity" Type="int" Nullable="false" />
+          <Property Name="PriceBought" Type="float" Nullable="false" />
+          <Property Name="BoughtTimeMain" Type="datetime" Nullable="false" />
+        </EntityType>
+        <Association Name="FK__price__sodaId__68487DD7">
+          <End Role="soda" Type="Self.soda" Multiplicity="0..1" />
+          <End Role="price" Type="Self.price" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="soda">
+              <PropertyRef Name="sodaId" />
+            </Principal>
+            <Dependent Role="price">
+              <PropertyRef Name="sodaId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__quantity__sodaId__73BA3083">
+          <End Role="soda" Type="Self.soda" Multiplicity="0..1" />
+          <End Role="quantity" Type="Self.quantity" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="soda">
+              <PropertyRef Name="sodaId" />
+            </Principal>
+            <Dependent Role="quantity">
+              <PropertyRef Name="sodaId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__vending__priceId__778AC167">
+          <End Role="price" Type="Self.price" Multiplicity="0..1" />
+          <End Role="vending" Type="Self.vending" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="price">
+              <PropertyRef Name="priceId" />
+            </Principal>
+            <Dependent Role="vending">
+              <PropertyRef Name="priceId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__vending__sodaId__76969D2E">
+          <End Role="soda" Type="Self.soda" Multiplicity="0..1" />
+          <End Role="vending" Type="Self.vending" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="soda">
+              <PropertyRef Name="sodaId" />
+            </Principal>
+            <Dependent Role="vending">
+              <PropertyRef Name="sodaId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__vending__sodaQnt__787EE5A0">
+          <End Role="quantity" Type="Self.quantity" Multiplicity="0..1" />
+          <End Role="vending" Type="Self.vending" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="quantity">
+              <PropertyRef Name="qntId" />
+            </Principal>
+            <Dependent Role="vending">
+              <PropertyRef Name="sodaQnt" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="VendingMachineModelStoreContainer">
+          <EntitySet Name="price" EntityType="Self.price" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="quantity" EntityType="Self.quantity" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="soda" EntityType="Self.soda" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="vending" EntityType="Self.vending" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="vendingTable" EntityType="Self.vendingTable" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__price__sodaId__68487DD7" Association="Self.FK__price__sodaId__68487DD7">
+            <End Role="soda" EntitySet="soda" />
+            <End Role="price" EntitySet="price" />
+          </AssociationSet>
+          <AssociationSet Name="FK__quantity__sodaId__73BA3083" Association="Self.FK__quantity__sodaId__73BA3083">
+            <End Role="soda" EntitySet="soda" />
+            <End Role="quantity" EntitySet="quantity" />
+          </AssociationSet>
+          <AssociationSet Name="FK__vending__priceId__778AC167" Association="Self.FK__vending__priceId__778AC167">
+            <End Role="price" EntitySet="price" />
+            <End Role="vending" EntitySet="vending" />
+          </AssociationSet>
+          <AssociationSet Name="FK__vending__sodaId__76969D2E" Association="Self.FK__vending__sodaId__76969D2E">
+            <End Role="soda" EntitySet="soda" />
+            <End Role="vending" EntitySet="vending" />
+          </AssociationSet>
+          <AssociationSet Name="FK__vending__sodaQnt__787EE5A0" Association="Self.FK__vending__sodaQnt__787EE5A0">
+            <End Role="quantity" EntitySet="quantity" />
+            <End Role="vending" EntitySet="vending" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="VendingMachineModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="price">
+          <Key>
+            <PropertyRef Name="priceId" />
+          </Key>
+          <Property Name="priceId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="sodaId" Type="Int32" />
+          <Property Name="price1" Type="Double" Nullable="false" />
+          <NavigationProperty Name="soda" Relationship="Self.FK__price__sodaId__68487DD7" FromRole="price" ToRole="soda" />
+          <NavigationProperty Name="vendings" Relationship="Self.FK__vending__priceId__778AC167" FromRole="price" ToRole="vending" />
+        </EntityType>
+        <EntityType Name="quantity">
+          <Key>
+            <PropertyRef Name="qntId" />
+          </Key>
+          <Property Name="qntId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="sodaId" Type="Int32" />
+          <Property Name="quantity1" Type="Int32" />
+          <Property Name="qntCtrl" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="soda" Relationship="Self.FK__quantity__sodaId__73BA3083" FromRole="quantity" ToRole="soda" />
+          <NavigationProperty Name="vendings" Relationship="Self.FK__vending__sodaQnt__787EE5A0" FromRole="quantity" ToRole="vending" />
+        </EntityType>
+        <EntityType Name="soda">
+          <Key>
+            <PropertyRef Name="sodaId" />
+          </Key>
+          <Property Name="sodaId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="sodaName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="sodaBrand" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="prices" Relationship="Self.FK__price__sodaId__68487DD7" FromRole="soda" ToRole="price" />
+          <NavigationProperty Name="quantities" Relationship="Self.FK__quantity__sodaId__73BA3083" FromRole="soda" ToRole="quantity" />
+          <NavigationProperty Name="vendings" Relationship="Self.FK__vending__sodaId__76969D2E" FromRole="soda" ToRole="vending" />
+        </EntityType>
+        <EntityType Name="vending">
+          <Key>
+            <PropertyRef Name="vendId" />
+          </Key>
+          <Property Name="vendId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="sodaId" Type="Int32" />
+          <Property Name="soldqnt" Type="Int32" Nullable="false" />
+          <Property Name="priceent" Type="Double" Nullable="false" />
+          <Property Name="orgprice" Type="Double" Nullable="false" />
+          <Property Name="priceId" Type="Int32" />
+          <Property Name="sodaQnt" Type="Int32" />
+          <Property Name="boughttime" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="price" Relationship="Self.FK__vending__priceId__778AC167" FromRole="vending" ToRole="price" />
+          <NavigationProperty Name="quantity" Relationship="Self.FK__vending__sodaQnt__787EE5A0" FromRole="vending" ToRole="quantity" />
+          <NavigationProperty Name="soda" Relationship="Self.FK__vending__sodaId__76969D2E" FromRole="vending" ToRole="soda" />
+        </EntityType>
+        <EntityType Name="vendingTable">
+          <Key>
+            <PropertyRef Name="vendingId" />
+          </Key>
+          <Property Name="vendingId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="PricePerUnit" Type="Double" Nullable="false" />
+          <Property Name="SoldQuantity" Type="Int32" Nullable="false" />
+          <Property Name="PriceBought" Type="Double" Nullable="false" />
+          <Property Name="BoughtTimeMain" Type="DateTime" Nullable="false" Precision="3" />
+        </EntityType>
+        <Association Name="FK__price__sodaId__68487DD7">
+          <End Role="soda" Type="Self.soda" Multiplicity="0..1" />
+          <End Role="price" Type="Self.price" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="soda">
+              <PropertyRef Name="sodaId" />
+            </Principal>
+            <Dependent Role="price">
+              <PropertyRef Name="sodaId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__vending__priceId__778AC167">
+          <End Role="price" Type="Self.price" Multiplicity="0..1" />
+          <End Role="vending" Type="Self.vending" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="price">
+              <PropertyRef Name="priceId" />
+            </Principal>
+            <Dependent Role="vending">
+              <PropertyRef Name="priceId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__quantity__sodaId__73BA3083">
+          <End Role="soda" Type="Self.soda" Multiplicity="0..1" />
+          <End Role="quantity" Type="Self.quantity" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="soda">
+              <PropertyRef Name="sodaId" />
+            </Principal>
+            <Dependent Role="quantity">
+              <PropertyRef Name="sodaId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__vending__sodaQnt__787EE5A0">
+          <End Role="quantity" Type="Self.quantity" Multiplicity="0..1" />
+          <End Role="vending" Type="Self.vending" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="quantity">
+              <PropertyRef Name="qntId" />
+            </Principal>
+            <Dependent Role="vending">
+              <PropertyRef Name="sodaQnt" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__vending__sodaId__76969D2E">
+          <End Role="soda" Type="Self.soda" Multiplicity="0..1" />
+          <End Role="vending" Type="Self.vending" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="soda">
+              <PropertyRef Name="sodaId" />
+            </Principal>
+            <Dependent Role="vending">
+              <PropertyRef Name="sodaId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="VendingMachineContext" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="prices" EntityType="Self.price" />
+          <EntitySet Name="quantities" EntityType="Self.quantity" />
+          <EntitySet Name="sodas" EntityType="Self.soda" />
+          <EntitySet Name="vendings" EntityType="Self.vending" />
+          <EntitySet Name="vendingTables" EntityType="Self.vendingTable" />
+          <AssociationSet Name="FK__price__sodaId__68487DD7" Association="Self.FK__price__sodaId__68487DD7">
+            <End Role="soda" EntitySet="sodas" />
+            <End Role="price" EntitySet="prices" />
+          </AssociationSet>
+          <AssociationSet Name="FK__vending__priceId__778AC167" Association="Self.FK__vending__priceId__778AC167">
+            <End Role="price" EntitySet="prices" />
+            <End Role="vending" EntitySet="vendings" />
+          </AssociationSet>
+          <AssociationSet Name="FK__quantity__sodaId__73BA3083" Association="Self.FK__quantity__sodaId__73BA3083">
+            <End Role="soda" EntitySet="sodas" />
+            <End Role="quantity" EntitySet="quantities" />
+          </AssociationSet>
+          <AssociationSet Name="FK__vending__sodaQnt__787EE5A0" Association="Self.FK__vending__sodaQnt__787EE5A0">
+            <End Role="quantity" EntitySet="quantities" />
+            <End Role="vending" EntitySet="vendings" />
+          </AssociationSet>
+          <AssociationSet Name="FK__vending__sodaId__76969D2E" Association="Self.FK__vending__sodaId__76969D2E">
+            <End Role="soda" EntitySet="sodas" />
+            <End Role="vending" EntitySet="vendings" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="VendingMachineModelStoreContainer" CdmEntityContainer="VendingMachineContext">
+          <EntitySetMapping Name="prices">
+            <EntityTypeMapping TypeName="VendingMachineModel.price">
+              <MappingFragment StoreEntitySet="price">
+                <ScalarProperty Name="priceId" ColumnName="priceId" />
+                <ScalarProperty Name="sodaId" ColumnName="sodaId" />
+                <ScalarProperty Name="price1" ColumnName="price" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="quantities">
+            <EntityTypeMapping TypeName="VendingMachineModel.quantity">
+              <MappingFragment StoreEntitySet="quantity">
+                <ScalarProperty Name="qntId" ColumnName="qntId" />
+                <ScalarProperty Name="sodaId" ColumnName="sodaId" />
+                <ScalarProperty Name="quantity1" ColumnName="quantity" />
+                <ScalarProperty Name="qntCtrl" ColumnName="qntCtrl" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sodas">
+            <EntityTypeMapping TypeName="VendingMachineModel.soda">
+              <MappingFragment StoreEntitySet="soda">
+                <ScalarProperty Name="sodaId" ColumnName="sodaId" />
+                <ScalarProperty Name="sodaName" ColumnName="sodaName" />
+                <ScalarProperty Name="sodaBrand" ColumnName="sodaBrand" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vendings">
+            <EntityTypeMapping TypeName="VendingMachineModel.vending">
+              <MappingFragment StoreEntitySet="vending">
+                <ScalarProperty Name="vendId" ColumnName="vendId" />
+                <ScalarProperty Name="sodaId" ColumnName="sodaId" />
+                <ScalarProperty Name="soldqnt" ColumnName="soldqnt" />
+                <ScalarProperty Name="priceent" ColumnName="priceent" />
+                <ScalarProperty Name="orgprice" ColumnName="orgprice" />
+                <ScalarProperty Name="priceId" ColumnName="priceId" />
+                <ScalarProperty Name="sodaQnt" ColumnName="sodaQnt" />
+                <ScalarProperty Name="boughttime" ColumnName="boughttime" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vendingTables">
+            <EntityTypeMapping TypeName="VendingMachineModel.vendingTable">
+              <MappingFragment StoreEntitySet="vendingTable">
+                <ScalarProperty Name="vendingId" ColumnName="vendingId" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="PricePerUnit" ColumnName="PricePerUnit" />
+                <ScalarProperty Name="SoldQuantity" ColumnName="SoldQuantity" />
+                <ScalarProperty Name="PriceBought" ColumnName="PriceBought" />
+                <ScalarProperty Name="BoughtTimeMain" ColumnName="BoughtTimeMain" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
