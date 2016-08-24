@@ -4,7 +4,18 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
-    <title></title>
+    <%--<script type="text/javascript">
+        function Check() {
+            var drpdwnSoda = document.getElementById("DropDownSoda").value;
+            var lbl = document.getElementById("lblprice").value;
+            var drpdwnQuantity = document.getElementById("DropDownQunatity").value;
+            if (drpdwnSoda == "0" && lbl.value == 0 && drpdwnQuantity == "0") {
+                alert("Select a Soda and Quantity");
+            }
+        }
+    </script>--%>
+    <title>Vending Machine</title>
+
 </head>
 <body>
     <form id="form1" runat="server">
@@ -51,10 +62,18 @@
                 </tr>
                 <tr>
                     <td colspan="2">
-                        <asp:Button ID="btngetsoda" runat="server" Text="Get Soda" OnClick="btngetsoda_Click" />
+                        <asp:Button ID="btngetsoda" runat="server" Text="Get Soda" OnClick="btngetsoda_Click"/>
                     </td>
                 </tr>
             </table>
+            <div>
+                <asp:Label ID="lblValidate" runat="server"></asp:Label>
+            </div>
+<%--                     <asp:CustomValidator ID="custmvalid" runat="server"
+                        EnableClientScript="true"
+                        ErrorMessage="Please fill atleast one field"
+                        ValidationGroup="group"
+                        OnServerValidate="custmvalid_ServerValidate"></asp:CustomValidator>--%>
             <div>
                 <asp:Label ID="label" runat="server"></asp:Label>
             </div>

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using VendingMachine.Infrastructure;
 using VendingMachine.Models;
 
 namespace VendingMachine
@@ -12,7 +13,21 @@ namespace VendingMachine
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+              VendingBL vm = new VendingBL();
+            //    quantity qnt = new quantity();
+            //    int id = qnt.qntId;
+            
+                List<string> invalid = vm.Qnty(1);
+                if (invalid.Count == 0)
+                {
+                    lblLow.Text = "";
 
+                }
+                else
+                {
+                    lblLow.Text = invalid[0];
+                }
+            
         }
 
         protected void btnUpdatePrice_Click(object sender, EventArgs e)

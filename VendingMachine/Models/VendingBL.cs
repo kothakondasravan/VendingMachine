@@ -47,6 +47,18 @@ namespace VendingMachine.Models
             var qnt = vc.quantities.Select(p => new quantityVM { qntId = p.qntId, sodaId = p.sodaId, quantity1 = p.quantity1, qntCtrl = p.qntCtrl }).ToList();
             return qnt;
         }
+        public List<string> Qnty(int id)
+        {
+            var qntComp = vc.quantities.Where(p => p.qntId == id).FirstOrDefault();
+            List<string> error = new List<string>();
+            
+            if (qntComp.quantity1 <= qntComp.qntCtrl)
+            {
+                error.Add("Please update the Vending Machine");
+                
+            }
+            return error;
+        }
 
         //public int GetQnty(int id)
         //{
